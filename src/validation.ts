@@ -58,6 +58,13 @@ declare const required: <FieldCodecs extends {[k: string]: Codec<any>}>(codecs: 
     readonly [k in keyof FieldCodecs]: [FieldCodecs[k]] extends [Codec<infer A>] ? A : never
 }>
 
+// DIFFERENT
+declare const optional: <FieldCodecs extends {[k: string]: Codec<any>}>(codecs: FieldCodecs) => Codec<{
+    readonly [k in keyof FieldCodecs]: [FieldCodecs[k]] extends [Codec<infer A>] ? A : never
+}>
+
+
+// INTERSECTION BETWEEN OPTIONAL AND REQUIRED
 
 export type TypeOf<C extends Codec<any>> = [C] extends [Codec<infer X>] ? X : never
 
